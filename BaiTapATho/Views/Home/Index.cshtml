@@ -1,0 +1,292 @@
+﻿@model IEnumerable<BaiTapATho.Models.Employee>;
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Dashboard</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">Primary Card</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="#">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                    <div class="card-body">Warning Card</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="#">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-success text-white mb-4">
+                    <div class="card-body">Success Card</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="#">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">Danger Card</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="#">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-chart-area me-1"></i>
+                        Area Chart Example
+                    </div>
+                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-chart-bar me-1"></i>
+                        Bar Chart Example
+                    </div>
+                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                DataTable Example
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Birthday</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Birthday</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody id="tbodyElement">
+                        @foreach(var item in Model){
+                        <tr>
+                            <td>@item.EmployeeName</td>
+                            <td>@item.Email</td>
+                            <td>@item.Address</td>
+                            <td>@item.Birthday</td>
+                            <td>@item.Phone</td>
+                            <td>@item.Status</td>
+                            <td>
+                                <button data-target="#modalCart" data-toggle="modal">Edit</button>
+                                <button data-target="#modalConfirmDelete" data-toggle="modal">Delete</button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+                <button class="btn btn-primary" data-target="#modalCart" data-toggle="modal">Add</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div>
+        <div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Add employee</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <!--Body-->
+                    <div class="modal-body">
+                        <form id="formData">
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="inputID" type="text" required placeholder="ID"
+                                   oninvalid="this.setCustomValidity('Enter ID here')"
+                                   oninput="this.setCustomValidity('')" />
+                            <label for="inputEmail">Employee ID</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="inputName" type="text" required placeholder="Name"
+                                   oninvalid="this.setCustomValidity('Enter name here')"
+                                   oninput="this.setCustomValidity('')" />
+                            <label for="inputEmail">Employee Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="inputEmail" type="email" name="Email" required placeholder="Email"
+                                   oninvalid="this.setCustomValidity('Enter email here')"
+                                   oninput="this.setCustomValidity('')" />
+                            <label for="inputEmail">Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="inputPassword" type="password" required placeholder="Password"
+                                   oninvalid="this.setCustomValidity('Enter password here')"
+                                   oninput="this.setCustomValidity('')" />
+                            <label for="inputEmail">Password</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="inputAddress" type="text" required placeholder="Address"
+                                   oninvalid="this.setCustomValidity('Enter address here')"
+                                   oninput="this.setCustomValidity('')" />
+                            <label for="inputEmail">Address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="inputBirthday" type="text" required placeholder="Birthday"
+                                   oninvalid="this.setCustomValidity('Enter birthday here')"
+                                   oninput="this.setCustomValidity('')" />
+                            <label for="inputEmail">Birthday</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="inputPhone" type="text" required placeholder="Phone"
+                                   oninvalid="this.setCustomValidity('Enter phone here')"
+                                   oninput="this.setCustomValidity('')" />
+                            <label for="inputEmail">Phone</label>
+                        </div>
+                        </form>
+                    
+
+                    </div>
+                    <!--Footer-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" id="AddEmployee" >Add employee</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal: modalCart -->
+    </div>
+    <!-- Modal: modalCart -->
+<div>
+    <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+            <!--Content-->
+            <div class="modal-content text-center">
+                <!--Header-->
+                <div class="modal-header d-flex justify-content-center">
+                    <p class="heading">Are you sure?</p>
+                </div>
+
+                <!--Body-->
+                <div class="modal-body">
+
+                    <i class="fas fa-times fa-4x animated rotateIn"></i>
+                    <p id="DeleteMessage"></p>
+
+                </div>
+
+                <!--Footer-->
+                <div class="modal-footer flex-center">
+                    <button id="DeleteEmployee" class="btn  btn-outline-danger" onclick="DelEmployee()">Yes</button>
+                    <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">No</a>
+                </div>
+            </div>
+            </div>
+    </div>
+    <!-- Modal: modalCart -->
+</div>
+
+<script>
+    $(document).ready(function add() {
+        $("#AddEmployee").click(function () {
+            var name = $("#inputName").val();
+            var id = $("#inputID").val();
+            var email = $("#inputEmail").val();
+            var pass = $("#inputPassword").val();
+            var address = $("#inputAddress").val();
+            var birthday = $("#inputBirthday").val();
+            var phone = $("#inputPhone").val();
+            $.ajax({
+                type: "POST",
+                url: "/Home/CreateEmployee",
+                data: {
+                    EmployeeId: id,
+                    EmployeeName: name,
+                    Email: email,
+                    Password: pass,
+                    Address: address,
+                    Phone: phone,
+                    Birthday: birthday
+                },
+                success: function (employee) {
+                    //window.location = result.redirectToUrl;
+                    //var html='';
+                    //for(let i=0; i<result.length; i++){
+                    //    html += '<tr>'+result[i].name + '</tr>'
+                    //}
+                    
+                    $("#tbodyElement").append(
+                        '<tr>'+
+                            '<td>'+name+'</td>'+
+                            '<td>'+email+'</td>'+
+                            '<td>'+address+'</td>'+
+                            '<td>'+birthday+'</td>'+
+                            '<td>'+phone+'</td>'+
+                            '<td>'+employee.Status+'</td>'+
+                            '<td>'+
+                        '<button data-target="#modalCart" data-toggle="modal">Edit</button>' +
+                        '<button data-target="#modalConfirmDelete" data-toggle="modal">Delete</button>' +
+                            '</td>'+
+                        '</tr>'
+                    );
+                    $(this).modal('hide');
+                    
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    function DelEmployee(id){
+    $.ajax({
+    type:"Get",
+    url:"/Home/DeleteEmployee",
+    data:{id:id},
+    success: function (result) {
+        window.location = result.redirectToUrl;
+    }
+    });
+    }
+</script>
+
+               @*  {
+                    EmployeeId: id,
+                    EmployeeName: name,
+                    Email: email,
+                    Password: pass,
+                    Address: address,
+                    Phone: phone,
+                    Birthday: birthday,
+                    Status: status
+                },*@
