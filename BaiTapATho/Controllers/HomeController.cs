@@ -63,5 +63,11 @@ namespace BaiTapATho.Controllers
             data.SaveChanges();
             return Json(obj);
         }
+
+        [HttpPut]
+        public ActionResult EditEmployee(string id, Employee em)
+        {
+            return View();
+        }
     }
 }
